@@ -15,9 +15,16 @@ public class Battleship {
         char tablDisparos[][] = new char[tamaño_tblr][tamaño_tblr];
         switch (opcion){
             case 1:
-
+                System.out.println(
+                        "********************\n" +
+                        "  Tablero de Barcos\n" +
+                        "********************\n");
                 crear_tablero(tablBarcos);
                 System.out.println("\t");
+                System.out.println(
+                        "********************\n" +
+                        "  Tablero de Disparos\n" +
+                        "********************\n");
                 crear_tablero(tablDisparos);
                 for (int i = 0; i < 5; i++) {
                     colocarLancha(tablBarcos, 'L', 1);
@@ -30,10 +37,14 @@ public class Battleship {
                 colocarPortaviones(tablBarcos, 'P', 5);
 
                 System.out.println("Tablero después de colocar lanchas:");
-                mostrar_tablero(tablBarcos);
+                mostrar_tablero(tablDisparos);
                 for (int i = 0; i < 50; i++) {
                     System.out.println(i+"/50");
                     disparo(tablDisparos, tablBarcos);
+                    System.out.println(
+                            "********************\n" +
+                                    "  Tablero de Disparos\n" +
+                                    "********************\n");
                     mostrar_tablero(tablDisparos);
 
                     if (!quedanBarcos(tablDisparos, tablBarcos)) {
@@ -147,7 +158,8 @@ public class Battleship {
                 for (int i = 0; i < Portaviones; i++) {
                     colocarPortaviones(tablBarcosPerso, 'P', 5);
                 }
-                mostrar_tablero(tablBarcosPerso);
+                System.out.println("Tablero despues de colocar barcos:");
+                mostrar_tablero(tablDisparosPerso);
                 System.out.println("Número de intentos: ");
                 int intentos = perso.nextInt();
                 for (int i = 0; i < intentos; i++) {
@@ -215,11 +227,9 @@ public class Battleship {
         do {
             letra = (int) (Math.random() * tamaño_tblr);
             numero = (int) (Math.random() * tamaño_tblr);
-            System.out.println("Intento de colocar lancha en: " + letra + ", " + numero);
         } while (!esEspacioDisponible(tablero, letra, numero, longitud));
 
         tablero[letra][numero] = tipoBarco;
-        System.out.println("Lancha en: " + letra + ", " + numero);
     }
 
     // Función para colocar un barco en el tablero de forma aleatoria
@@ -235,7 +245,6 @@ public class Battleship {
         for (int k = 0; k < longitud; k++) {
             tablero[letra][numero + k] = tipoBarco;
         }
-        System.out.println("Barco en: " + letra + ", " + numero);
     }
 
     // Función para colocar un Crucero en el tablero de forma aleatoria
@@ -252,7 +261,6 @@ public class Battleship {
             tablero[letra][numero + k] = tipoBarco;
         }
 
-        System.out.println("Crucero en: " + letra + ", " + numero);
     }
 
     // Función para colocar un Portaviones verticalmente en el tablero de forma aleatoria
@@ -269,7 +277,6 @@ public class Battleship {
             tablero[letra + k][numero] = tipoBarco;
         }
 
-        System.out.println("Portaviones en: " + letra + ", " + numero);
     }
 
     //Funcion para comprobar si se puede colocar algun barco en la casilla
