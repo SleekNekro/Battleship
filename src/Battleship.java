@@ -15,16 +15,9 @@ public class Battleship {
         char tablDisparos[][] = new char[tamaño_tblr][tamaño_tblr];
         switch (opcion){
             case 1:
-                System.out.println(
-                        "********************\n" +
-                        "  Tablero de Barcos\n" +
-                        "********************\n");
+                titulosB();
                 crear_tablero(tablBarcos);
-                System.out.println("\t");
-                System.out.println(
-                        "********************\n" +
-                        "  Tablero de Disparos\n" +
-                        "********************\n");
+                titulosD();
                 crear_tablero(tablDisparos);
                 for (int i = 0; i < 5; i++) {
                     colocarLancha(tablBarcos, 'L', 1);
@@ -36,16 +29,12 @@ public class Battleship {
                 colocarCrucero(tablBarcos, 'Z', 4);
                 colocarPortaviones(tablBarcos, 'P', 5);
 
-                System.out.println("Tablero después de colocar lanchas:");
+                titulosD();
                 mostrar_tablero(tablDisparos);
                 for (int i = 0; i < 50; i++) {
                     System.out.println(i+"/50");
                     disparo(tablDisparos, tablBarcos);
-                    System.out.println(
-                            "********************\n" +
-                                    "  Tablero de Disparos\n" +
-                                    "********************\n");
-                    mostrar_tablero(tablDisparos);
+                    titulosD();
 
                     if (!quedanBarcos(tablDisparos, tablBarcos)) {
                         System.out.println("¡Has hundido todos los barcos! ¡Has ganado el juego!");
@@ -60,8 +49,9 @@ public class Battleship {
                 }
                 break;
             case 2:
+                titulosB();
                 crear_tablero(tablBarcos);
-                System.out.println("\t");
+                titulosD();
                 crear_tablero(tablDisparos);
                 for (int i = 0; i < 2; i++) {
                     colocarLancha(tablBarcos, 'L', 1);
@@ -71,11 +61,12 @@ public class Battleship {
                 colocarCrucero(tablBarcos, 'Z', 4);
                 colocarPortaviones(tablBarcos, 'P', 5);
 
-                System.out.println("Tablero después de colocar lanchas:");
-                mostrar_tablero(tablBarcos);
+                titulosD();
+                mostrar_tablero(tablDisparos);
                 for (int i = 0; i < 30; i++) {
                     System.out.println(i+"/30");
                     disparo(tablDisparos, tablBarcos);
+                    titulosD();
                     mostrar_tablero(tablDisparos);
 
                     if (!quedanBarcos(tablDisparos, tablBarcos)) {
@@ -91,18 +82,20 @@ public class Battleship {
 
                 break;
             case 3:
+                titulosB();
                 crear_tablero(tablBarcos);
-                System.out.println("\t");
+                titulosD();
                 crear_tablero(tablDisparos);
 
                 colocarLancha(tablBarcos, 'L', 1);
                 colocarBarco(tablBarcos, 'B', 3);
 
-                System.out.println("Tablero después de colocar lanchas:");
-                mostrar_tablero(tablBarcos);
+                titulosD();
+                mostrar_tablero(tablDisparos);
                 for (int i = 0; i < 10; i++) {
                     System.out.println(i+"/10");
                     disparo(tablDisparos, tablBarcos);
+                    titulosD();
                     mostrar_tablero(tablDisparos);
 
                     if (!quedanBarcos(tablDisparos, tablBarcos)) {
@@ -131,8 +124,9 @@ public class Battleship {
 
                 char tablBarcosPerso[][] = new char[tamaño_pers][tamaño_pers];
                 char tablDisparosPerso[][] = new char[tamaño_pers][tamaño_pers];
+                titulosB();
                 crear_tablero(tablBarcosPerso);
-                System.out.println("\t");
+                titulosD();
                 crear_tablero(tablDisparosPerso);
 
                 System.out.println("Elige el numero de Lanchas: ");
@@ -158,13 +152,14 @@ public class Battleship {
                 for (int i = 0; i < Portaviones; i++) {
                     colocarPortaviones(tablBarcosPerso, 'P', 5);
                 }
-                System.out.println("Tablero despues de colocar barcos:");
+                titulosD();
                 mostrar_tablero(tablDisparosPerso);
                 System.out.println("Número de intentos: ");
                 int intentos = perso.nextInt();
                 for (int i = 0; i < intentos; i++) {
                     System.out.println(i + "/" + intentos);
                     disparo(tablDisparosPerso, tablBarcosPerso);
+                    titulosD();
                     mostrar_tablero(tablDisparosPerso);
 
                     if (!quedanBarcos(tablDisparosPerso, tablBarcosPerso)) {
@@ -184,6 +179,16 @@ public class Battleship {
                 System.exit(0);
         }
 
+    }
+    public static void  titulosD(){
+        System.out.println( "*******************\n" +
+                "Tablero de Disparos\n" +
+                "*******************\n");
+    }
+    public static void titulosB(){
+        System.out.println( "*******************\n" +
+                "Tablero de Barcos\n" +
+                "*******************\n");
     }
 
     // Función para disparar
@@ -291,7 +296,6 @@ public class Battleship {
 
     // Función para mostrar el tablero
     public static void mostrar_tablero(char[][] tablero) {
-        System.out.println("Tablero del Jugador:");
 
         for (int k = 0; k <= tablero.length-1; k++) {
             System.out.print("\t" + k + "  ");
